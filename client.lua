@@ -107,6 +107,21 @@ Citizen.Wait(10) -- anti crash
 end
 end)
 
+-- Désactiver les sons ambiants - Scanner Police, Bruits de tir à l'ammunation 
+Citizen.CreateThread(function()
+    StartAudioScene('CHARACTER_CHANGE_IN_SKY_SCENE')
+    SetAudioFlag("PoliceScannerDisabled", true)
+end)
+
+
+-- Désactiver les pompes LSPD
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(10)
+        DisablePlayerVehicleRewards(PlayerId())
+    end
+end)
+
 -- Désactive les aggressions des pnjs sur un joueur 
 SetRelationshipBetweenGroups(1, GetHashKey("AMBIENT_GANG_LOST"), GetHashKey('PLAYER'))
 SetRelationshipBetweenGroups(1, GetHashKey("AMBIENT_GANG_SALVA"), GetHashKey('PLAYER'))
